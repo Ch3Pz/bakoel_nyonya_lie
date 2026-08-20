@@ -170,7 +170,7 @@ export const menuItems: MenuItem[] = [
     name: "Brownies Panggang",
     category: "Cake & Bakery",
     description: "Brownies panggang yang padat dan coklaty.",
-    image: "/images/menu/chat/clean/brownies-chat.jpg",
+    image: "/images/menu/chat/brownies-panggang-centered.jpg",
   },
   {
     id: "soft-cookies",
@@ -239,8 +239,8 @@ export const menuItems: MenuItem[] = [
     id: "lemper-ayam",
     name: "Lemper Ayam",
     category: "Gurih & Siap Makan",
-    description: "Ketan gurih berisi ayam, dibungkus daun pisang.",
-    image: "/images/menu/chat/lemper-ayam-bakar-ongol-ongol.jpg",
+    description: "Ketan gurih berisi ayam bakar, dibungkus daun pisang.",
+    image: "/images/menu/chat/lemper-ayam-bakar-centered.jpg",
   },
   {
     id: "sosis-solo",
@@ -318,14 +318,14 @@ export const menuItems: MenuItem[] = [
     name: "Choipan",
     category: "Gurih & Siap Makan",
     description: "Chaikue/kue sayur halal. 1 kap isi 4 lengkap saus merah.",
-    image: "/images/menu/chat/choipan.jpg",
+    image: "/images/menu/chat/choipan-centered.jpg",
   },
   {
     id: "lumpia-choipan",
     name: "Lumpia Choipan",
     category: "Gurih & Siap Makan",
     description: "Lumpia isi choipan dengan bengkuang dan ebi.",
-    image: "/images/menu/chat/choipan.jpg",
+    image: "/images/menu/chat/lumpia-choipan-centered.jpg",
   },
   {
     id: "nasi-uduk-wangi",
@@ -482,6 +482,13 @@ export const menuItems: MenuItem[] = [
     category: "Gurih & Siap Makan",
     description: "Ketan grintul dengan kacang tolo dan bumbu gurih.",
     image: "/images/menu/chat/ketan-grintul-kacang-tolo.jpg",
+  },
+  {
+    id: "ongol-ongol",
+    name: "Ongol Ongol",
+    category: "Kue Tradisional",
+    description: "Kue kenyal manis dengan taburan kelapa parut.",
+    image: "/images/menu/chat/ongol-ongol-centered.jpg",
   },
   {
     id: "ayam-goreng-lengkuas",
