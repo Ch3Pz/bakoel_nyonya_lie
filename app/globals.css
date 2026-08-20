@@ -205,6 +205,8 @@ button { cursor: pointer; }
 .menu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 .menu-card { display: flex; flex-direction: column; height: 500px; min-height: 500px; overflow: hidden; border-radius: 16px; background: #fffdf8; border: 1px solid rgba(32, 55, 39, 0.08); transition: transform 180ms ease, box-shadow 180ms ease; }
 .menu-card:hover { transform: translateY(-5px); box-shadow: 0 16px 28px rgba(58, 67, 37, 0.1); }
+.menu-card--clickable { cursor: zoom-in; }
+.menu-card--clickable:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 .menu-card__image-wrap { position: relative; flex: 0 0 57%; height: 57%; overflow: hidden; background: var(--cream-deep); }
 .menu-card__image { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 420ms ease; }
 .menu-card:hover .menu-card__image { transform: scale(1.045); }
@@ -218,6 +220,46 @@ button { cursor: pointer; }
 .price-placeholder { color: #db6d51; font-size: 0.67rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
 .order-link { border-bottom: 1px solid var(--ink); padding-bottom: 2px; font-size: 0.76rem; font-weight: 850; white-space: nowrap; }
 .order-link:hover { color: #db6d51; border-color: #db6d51; }
+
+.image-modal {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 56px);
+  background: rgba(20, 36, 26, 0.78);
+  backdrop-filter: blur(12px);
+  animation: image-modal-in 180ms ease-out both;
+}
+
+.image-modal__panel {
+  width: min(100%, 1100px);
+  max-height: calc(100vh - 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(16px, 2vw, 26px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 248, 234, 0.3);
+  border-radius: 24px;
+  background: var(--cream);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.image-modal__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.image-modal__eyebrow { margin: 0 0 5px; color: #db6d51; font-size: 0.64rem; font-weight: 850; letter-spacing: 0.1em; text-transform: uppercase; }
+.image-modal__header h2 { margin: 0; font-family: var(--display); font-size: clamp(1.65rem, 3vw, 2.5rem); font-weight: 500; letter-spacing: -0.05em; line-height: 1; }
+.image-modal__close { flex: none; width: 42px; height: 42px; display: grid; place-items: center; padding: 0 0 3px; border: 0; border-radius: 50%; background: var(--ink); color: var(--cream); font-size: 1.75rem; line-height: 1; transition: transform 160ms ease, background 160ms ease; }
+.image-modal__close:hover { transform: rotate(8deg) scale(1.05); background: #344f3a; }
+.image-modal__close:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.image-modal__image-wrap { min-height: 0; display: grid; place-items: center; overflow: hidden; border-radius: 16px; background: #17291c; }
+.image-modal__image-wrap img { display: block; width: 100%; max-height: calc(100vh - 165px); object-fit: contain; }
+
+@keyframes image-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 .empty-state { padding: 84px 20px; text-align: center; border-radius: 22px; border: 1px dashed var(--line); }
 .empty-state span { font-size: 2rem; color: var(--orange); }
@@ -293,6 +335,11 @@ button { cursor: pointer; }
   .price-placeholder { display: block; margin-bottom: 8px; font-size: 0.57rem; }
   .order-link { font-size: 0.68rem; }
   .menu-card__category { top: 7px; left: 7px; padding: 4px 7px; font-size: 0.48rem; }
+  .image-modal { padding: 12px; }
+  .image-modal__panel { max-height: calc(100vh - 24px); gap: 13px; padding: 14px; border-radius: 18px; }
+  .image-modal__close { width: 38px; height: 38px; font-size: 1.55rem; }
+  .image-modal__image-wrap { border-radius: 12px; }
+  .image-modal__image-wrap img { max-height: calc(100vh - 138px); }
   .order-banner { width: min(100% - 32px, 620px); min-height: 330px; margin-bottom: 32px; padding: 40px 30px 70px; display: block; border-radius: 22px; }
   .order-banner h2 { font-size: clamp(2.6rem, 12vw, 4.3rem); }
   .order-banner .button { margin-top: 26px; }

@@ -225,8 +225,8 @@ export const menuItems: MenuItem[] = [
     id: "roti-goreng",
     name: "Roti Goreng",
     category: "Cake & Bakery",
-    description: "Roti goreng hangat untuk camilan gurih-manis.",
-    image: "/images/menu/chat/clean/roti-goreng.jpg",
+    description: "Roti goreng dengan pilihan isian coklat, ayam, atau coklat keju.",
+    image: "/images/menu/chat/roti-goreng-2026-08-20.jpg",
   },
   {
     id: "chiffon-ijo-slice",
@@ -240,7 +240,7 @@ export const menuItems: MenuItem[] = [
     name: "Lemper Ayam",
     category: "Gurih & Siap Makan",
     description: "Ketan gurih berisi ayam, dibungkus daun pisang.",
-    image: "/images/menu/lemper.jpeg",
+    image: "/images/menu/chat/lemper-ayam-bakar-ongol-ongol.jpg",
   },
   {
     id: "sosis-solo",
@@ -475,6 +475,13 @@ export const menuItems: MenuItem[] = [
     category: "Gurih & Siap Makan",
     description: "Ketan gurih dengan pilihan urap atau serundeng.",
     image: "/images/menu/chat/clean/ketan-urap-serundeng.jpg",
+  },
+  {
+    id: "ketan-grintul-kacang-tolo",
+    name: "Ketan Grintul Kacang Tolo",
+    category: "Gurih & Siap Makan",
+    description: "Ketan grintul dengan kacang tolo dan bumbu gurih.",
+    image: "/images/menu/chat/ketan-grintul-kacang-tolo.jpg",
   },
   {
     id: "ayam-goreng-lengkuas",

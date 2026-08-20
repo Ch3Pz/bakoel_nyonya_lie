@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { categories, menuItems, type MenuItem } from "./catalog";
 
 const whatsappNumber = "628567701987";
@@ -13,9 +13,37 @@ function orderLink(itemName?: string) {
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-function MenuCard({ item }: { item: MenuItem }) {
+function MenuCard({ item, onOpenImage }: { item: MenuItem; onOpenImage: (item: MenuItem) => void }) {
+  const canOpenImage = Boolean(item.image);
+
+  const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (!canOpenImage || (event.target instanceof HTMLElement && event.target.closest("a, button"))) {
+      return;
+    }
+
+    onOpenImage(item);
+  };
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (!canOpenImage || (event.target instanceof HTMLElement && event.target.closest("a, button"))) {
+      return;
+    }
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onOpenImage(item);
+    }
+  };
+
   return (
-    <article className={`menu-card${item.image ? "" : " menu-card--no-image"}`}>
+    <article
+      className={`menu-card${item.image ? " menu-card--clickable" : " menu-card--no-image"}`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      tabIndex={canOpenImage ? 0 : undefined}
+      role={canOpenImage ? "button" : undefined}
+      aria-label={canOpenImage ? `Buka foto lengkap ${item.name}` : undefined}
+    >
       {item.image ? (
         <div className="menu-card__image-wrap">
           <img
@@ -57,6 +85,29 @@ function MenuCard({ item }: { item: MenuItem }) {
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   const [search, setSearch] = useState("");
+  const [selectedImage, setSelectedImage] = useState<MenuItem | null>(null);
+
+  useEffect(() => {
+    if (!selectedImage) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [selectedImage]);
 
   const visibleItems = useMemo(() => {
     const query = search.trim().toLocaleLowerCase("id-ID");
@@ -203,7 +254,7 @@ export default function HomePage() {
         {visibleItems.length ? (
           <div className="menu-grid">
             {visibleItems.map((item) => (
-              <MenuCard key={item.id} item={item} />
+              <MenuCard key={item.id} item={item} onOpenImage={setSelectedImage} />
             ))}
           </div>
         ) : (
@@ -248,6 +299,44 @@ export default function HomePage() {
         <span>Pesan favoritmu</span>
         <a href={orderLink()} target="_blank" rel="noreferrer">WhatsApp ↗</a>
       </div>
+
+      {selectedImage?.image ? (
+        <div
+          className="image-modal"
+          role="presentation"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setSelectedImage(null);
+            }
+          }}
+        >
+          <div
+            className="image-modal__panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="image-modal-title"
+          >
+            <div className="image-modal__header">
+              <div>
+                <p className="image-modal__eyebrow">{selectedImage.category}</p>
+                <h2 id="image-modal-title">{selectedImage.name}</h2>
+              </div>
+              <button
+                type="button"
+                className="image-modal__close"
+                onClick={() => setSelectedImage(null)}
+                aria-label="Tutup foto"
+                autoFocus
+              >
+                ×
+              </button>
+            </div>
+            <div className="image-modal__image-wrap">
+              <img src={selectedImage.image} alt={selectedImage.name} />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
