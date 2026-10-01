@@ -5,9 +5,11 @@ import { categories, menuItems, type MenuItem } from "./catalog";
 
 const whatsappNumber = "628567701987";
 
-function orderLink(itemName?: string) {
-  const message = itemName
-    ? `Halo Bakoel Nyonya Lie, saya ingin pesan ${itemName}. Boleh minta info harga dan ketersediaannya?`
+function orderLink(item?: MenuItem) {
+  const message = item
+    ? item.price
+      ? `Halo Bakoel Nyonya Lie, saya ingin pesan ${item.name} (${item.price}). Apakah tersedia?`
+      : `Halo Bakoel Nyonya Lie, saya ingin pesan ${item.name}. Boleh minta info harga dan ketersediaannya?`
     : "Halo Bakoel Nyonya Lie, saya ingin tanya menu dan ketersediaan hari ini.";
 
   return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
@@ -66,16 +68,30 @@ function MenuCard({ item, onOpenImage }: { item: MenuItem; onOpenImage: (item: M
           <p>{item.description}</p>
         </div>
         <div className="menu-card__footer">
-          <span className="price-placeholder">{item.price ?? "Harga menyusul"}</span>
-          <a
-            href={orderLink(item.name)}
-            className="order-link"
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Tanya harga ${item.name} via WhatsApp`}
-          >
-            Tanya <span aria-hidden="true">↗</span>
-          </a>
+          {item.price ? (
+            <>
+              <span className="menu-card__price">{item.price}</span>
+              <a
+                href={orderLink(item)}
+                className="order-link"
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Pesan ${item.name} via WhatsApp`}
+              >
+                Pesan <span aria-hidden="true">↗</span>
+              </a>
+            </>
+          ) : (
+            <a
+              href={orderLink(item)}
+              className="order-link"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Tanya harga ${item.name} via WhatsApp`}
+            >
+              Tanya harga <span aria-hidden="true">↗</span>
+            </a>
+          )}
         </div>
       </div>
     </article>
@@ -185,7 +201,7 @@ export default function HomePage() {
           </div>
           <div className="hero__note">
             <span className="hero__note-mark">✦</span>
-            Harga sedang disiapkan — chat kami untuk info terbaru.
+            Harga tercantum di katalog. Yang belum ada harga, tanya kami.
           </div>
         </div>
 
@@ -219,7 +235,7 @@ export default function HomePage() {
             <h2>Temukan yang kamu suka.</h2>
           </div>
           <p>
-            {menuItems.length} pilihan kue, cake, dan jajanan gurih. Harga akan segera ditambahkan.
+            {menuItems.length} pilihan kue, cake, dan jajanan gurih.
           </p>
         </header>
 
@@ -271,7 +287,7 @@ export default function HomePage() {
         <div className="order-banner__flourish" aria-hidden="true">✳</div>
         <div>
           <p className="section-heading__eyebrow">Need a hand choosing?</p>
-          <h2>Tanya stok, harga, atau rekomendasi kami.</h2>
+          <h2>Tanya stok hari ini, atau rekomendasi kami.</h2>
         </div>
         <a href={orderLink()} className="button button--cream" target="_blank" rel="noreferrer">
           Chat WhatsApp <span aria-hidden="true">↗</span>
@@ -320,6 +336,7 @@ export default function HomePage() {
               <div>
                 <p className="image-modal__eyebrow">{selectedImage.category}</p>
                 <h2 id="image-modal-title">{selectedImage.name}</h2>
+                {selectedImage.price ? <p className="image-modal__price">{selectedImage.price}</p> : null}
               </div>
               <button
                 type="button"

@@ -217,7 +217,8 @@ button { cursor: pointer; }
 .menu-card h3 { margin: 0; font-family: var(--display); font-size: 1.56rem; font-weight: 500; letter-spacing: -0.045em; line-height: 1.02; }
 .menu-card p { margin: 9px 0 0; color: var(--ink-soft); font-size: 0.79rem; line-height: 1.45; }
 .menu-card__footer { margin-top: auto; display: flex; align-items: end; justify-content: space-between; gap: 12px; }
-.price-placeholder { color: #db6d51; font-size: 0.67rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.menu-card__price { color: #db6d51; font-size: 0.92rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.image-modal__price { margin: 6px 0 0; color: #db6d51; font-size: 0.95rem; font-weight: 800; letter-spacing: -0.02em; }
 .order-link { border-bottom: 1px solid var(--ink); padding-bottom: 2px; font-size: 0.76rem; font-weight: 850; white-space: nowrap; }
 .order-link:hover { color: #db6d51; border-color: #db6d51; }
 
@@ -332,7 +333,7 @@ button { cursor: pointer; }
   .menu-card h3 { font-size: 1.27rem; }
   .menu-card p { margin-top: 7px; font-size: 0.68rem; line-height: 1.42; }
   .menu-card__footer { display: block; }
-  .price-placeholder { display: block; margin-bottom: 8px; font-size: 0.57rem; }
+  .menu-card__price { display: block; margin-bottom: 8px; font-size: 0.78rem; }
   .order-link { font-size: 0.68rem; }
   .menu-card__category { top: 7px; left: 7px; padding: 4px 7px; font-size: 0.48rem; }
   .image-modal { padding: 12px; }
